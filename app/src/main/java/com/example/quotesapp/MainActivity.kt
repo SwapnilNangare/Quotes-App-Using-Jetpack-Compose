@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.quotesapp.screen.QuotesDetail
 import com.example.quotesapp.screen.QuotesListItem
 import com.example.quotesapp.ui.theme.QuotesAppTheme
 
@@ -18,9 +19,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            QuotesListItem()
+            //   QuotesListItem()
 
+            QuotesDetail()
         }
+
     }
 }
 
