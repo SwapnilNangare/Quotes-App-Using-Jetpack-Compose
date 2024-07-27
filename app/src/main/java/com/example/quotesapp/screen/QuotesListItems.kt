@@ -2,6 +2,7 @@ package com.example.quotesapp.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,15 +33,18 @@ import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.quotesapp.models.Quote
 import java.nio.file.WatchEvent
 
 
 @Composable
-fun QuotesListItem() {
+fun QuotesListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
 
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        modifier = Modifier.padding(8.dp)
+        modifier = Modifier
+            .clickable { onClick(quote) }
+            .padding(8.dp)
 
     ) {
         Row(modifier = Modifier.padding(16.dp)) {
@@ -59,7 +63,7 @@ fun QuotesListItem() {
             Column(modifier = Modifier.weight(1f)) {
 
                 Text(
-                    text = "Time is most valuable thing a man can spend .",
+                    text = quote.text,
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 8.dp)
                 )
@@ -70,7 +74,7 @@ fun QuotesListItem() {
                         .height(1.dp)
                 )
                 Text(
-                    text = "Swapnil",
+                    text = quote.author,
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Thin,
                     modifier = Modifier.padding(top = 4.dp)
@@ -83,56 +87,4 @@ fun QuotesListItem() {
         }
 
     }
-}
-
-@Preview()
-@Composable
-fun QuotesDetail() {
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .fillMaxSize(1f)
-            .background(
-                Brush.sweepGradient(
-                    colors = listOf(
-                        Color(0xFFffffff),
-                        Color(0xFFE3E3E3),
-                    )
-                )
-            )
-    ) {
-        Card(
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-            modifier = Modifier.padding(32.dp)
-        ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(16.dp, 24.dp)
-            ) {
-                Image(
-                    imageVector = Icons.Filled.FormatQuote,
-                    contentDescription = "Quote",
-                    modifier = Modifier
-                        .size(80.dp)
-                        .rotate(180f)
-                )
-                Text(
-                    text = "Time is most valuable thing a man can spend",
-                    style = MaterialTheme.typography.headlineMedium
-                )
-                Spacer(Modifier.height(16.dp))
-                Text(
-                    text = "Swapnil",
-                    style = MaterialTheme.typography.bodyLarge
-                )
-
-            }
-
-        }
-    }
-
-
 }
